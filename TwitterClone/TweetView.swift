@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TweetView: View {
+    var isRecommended: Bool
     var userDisplayName: String
     var isVerified: Bool
     var userNickName: String
@@ -19,18 +20,38 @@ struct TweetView: View {
     
     var body: some View {
         
-        VStack {
-            HStack {
-                // some gray text
+        VStack(alignment: .center) {
+            if isRecommended {
+                HStack(spacing: 5) {
+                    // some gray text
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "person.fill")
+                        }
+                    }
+                    .frame(minWidth: 30, maxWidth: 50)
+                    
+                    VStack {
+                        HStack {
+                            Text("Your friend follows")
+                            Spacer()
+                        }
+                    }
+                }
+                .foregroundColor(.gray)
             }
-            HStack {
+            HStack(alignment: .top, spacing: 5) {
                 // body
                 VStack {
                     // profile photo
-                    Image(systemName: "person.fill.questionmark")
+                    Image("elon")
+                        .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .frame(minWidth: 30, maxWidth: 50, minHeight: 30, maxHeight: 50)
                         .clipShape(Circle())
                 }
+                .frame(minWidth: 30, maxWidth: 50)
                 
                 VStack(spacing: 10) {
                     HStack {
@@ -99,6 +120,7 @@ struct TweetView: View {
 struct TweetView_Previews: PreviewProvider {
     static var previews: some View {
         TweetView(
+            isRecommended: true,
             userDisplayName: "Jonh Doe",
             isVerified: true,
             userNickName: "JonhyDoey",
