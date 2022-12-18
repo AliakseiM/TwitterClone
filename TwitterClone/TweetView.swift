@@ -32,7 +32,7 @@ struct TweetView: View {
                         .clipShape(Circle())
                 }
                 
-                VStack {
+                VStack(spacing: 10) {
                     HStack {
                         // name, verified mark, nick, how long ago, actions menu
                         Text(userDisplayName)
@@ -44,7 +44,7 @@ struct TweetView: View {
                         
                         Text("@\(userNickName) · \(howLongAgo).")
                             .foregroundColor(.gray)
-                        
+                        Spacer()
                         Button {
                             
                         } label: {
@@ -53,7 +53,7 @@ struct TweetView: View {
                                 .opacity(0.5)
                         }
                     }
-                    
+
                     HStack {
                         // main text
                         Text(message)
@@ -70,19 +70,23 @@ struct TweetView: View {
                             Image(systemName: "message")
                             Text(commentsCount)
                         }
+                        Spacer()
                         HStack {
                             Image(systemName: "arrow.2.squarepath")
                             Text(retweetsCount)
                         }
+                        Spacer()
                         HStack {
                             Image(systemName: "heart")
                             Text(likesCount)
                         }
+                        Spacer()
                         HStack {
                             Image(systemName: "square.and.arrow.up")
                         }
-                        
+                        Spacer()
                     }
+                    .foregroundColor(.gray)
                     
                 }
             }
