@@ -7,20 +7,39 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct TweetFeed: View {
+    @EnvironmentObject var fetcher: TweetsFetcher
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            List(fetcher.tweets) { tweet in
+                VStack {
+                    Text(tweet.message)
+                    Text("UserID: \(tweet.userID)")
+                }
+            }
         }
-        .padding()
+        .refreshable {
+            do {
+                try await fetcher.fetchData()
+                print("fetched tweets")
+            } catch {
+                print(error)
+            }
+        }
+        .task {
+            do {
+                try await fetcher.fetchData()
+                print("fetched tweets")
+            } catch {
+                print(error)
+            }
+        }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct TweetFeed_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        TweetFeed()
     }
 }

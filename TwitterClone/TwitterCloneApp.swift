@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct TwitterCloneApp: App {
+    @StateObject private var fetcher = TweetsFetcher()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TweetFeed()
+                .environmentObject(fetcher)
         }
     }
 }
