@@ -86,7 +86,7 @@ struct TweetView: View {
                         // ? image
                     }
                     
-                    HStack(spacing: 10) {
+                    HStack {
                         // comments, retweets, likes, share
                         HStack {
                             Image(systemName: "message")
@@ -113,6 +113,7 @@ struct TweetView: View {
                         Spacer()
                     }
                     .foregroundColor(.gray)
+                    .font(.caption)
                     
                 }
             }
