@@ -57,6 +57,7 @@ struct TweetView: View {
                     HStack {
                         // name, verified mark, nick, how long ago, actions menu
                         Text(userDisplayName)
+                            .bold()
                         
                         if isVerified {
                             Image(systemName: "checkmark.seal.fill")
@@ -85,26 +86,30 @@ struct TweetView: View {
                         // ? image
                     }
                     
-                    HStack {
+                    HStack(spacing: 10) {
                         // comments, retweets, likes, share
                         HStack {
                             Image(systemName: "message")
                             Text(commentsCount)
                         }
+                        .bold()
                         Spacer()
                         HStack {
                             Image(systemName: "arrow.2.squarepath")
                             Text(retweetsCount)
                         }
+                        .bold()
                         Spacer()
                         HStack {
                             Image(systemName: "heart")
                             Text(likesCount)
                         }
+                        .bold()
                         Spacer()
                         HStack {
                             Image(systemName: "square.and.arrow.up")
                         }
+                        .bold()
                         Spacer()
                     }
                     .foregroundColor(.gray)
@@ -127,7 +132,7 @@ struct TweetView_Previews: PreviewProvider {
             howLongAgo: "2h",
             message: "Software engineering can be a challenging field, but it can also be extremely rewarding when you solve a tough problem or develop a new feature. It's all about finding creative solutions to complex issues and continuously learning and growing as a developer.",
             commentsCount: "52",
-            retweetsCount: "24K",
+            retweetsCount: "24,3K",
             likesCount: "1093"
         )
             .previewLayout(.sizeThatFits)
