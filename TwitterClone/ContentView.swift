@@ -11,35 +11,63 @@ struct TweetFeed: View {
     @EnvironmentObject var fetcher: TweetsFetcher
     
     var body: some View {
-        VStack {
-            List(fetcher.tweets) { tweet in
+        TabView {
+            NavigationStack {
                 VStack {
-                    Text(tweet.message)
-                    Text("UserID: \(tweet.userID)")
+                    List(fetcher.tweets) { tweet in
+                        TweetView(isRecommended: true, userDisplayName: "User User", isVerified: true, userNickName: "lol_kek", howLongAgo: "2h", message: tweet.message, commentsCount: "123", retweetsCount: "123", likesCount: "123")
+                            .listRowBackground(Color.clear)
+                    }
+                    
+                }
+                .refreshable {
+                    do {
+                        try await fetcher.fetchData()
+                        print("fetched tweets")
+                    } catch {
+                        print(error)
+                    }
+                }
+                .task {
+                    do {
+                        try await fetcher.fetchData()
+                        print("fetched tweets")
+                    } catch {
+                        print(error)
+                    }
                 }
             }
-        }
-        .refreshable {
-            do {
-                try await fetcher.fetchData()
-                print("fetched tweets")
-            } catch {
-                print(error)
+            .tabItem {
+                Label("", systemImage: "house.fill")
             }
-        }
-        .task {
-            do {
-                try await fetcher.fetchData()
-                print("fetched tweets")
-            } catch {
-                print(error)
+            
+            NavigationStack {
             }
+            .tabItem {
+                Label("", systemImage: "magnifyingglass")
+            }
+            
+            NavigationStack {
+            }
+            .tabItem {
+                Label("", systemImage: "bell")
+            }
+            
+            NavigationStack {
+            }
+            .tabItem {
+                Label("", systemImage: "envelope")
+            }
+            
         }
     }
 }
 
 struct TweetFeed_Previews: PreviewProvider {
+    static let fetcher = TweetsFetcher()
+        
     static var previews: some View {
         TweetFeed()
+            .environmentObject(fetcher)
     }
 }
