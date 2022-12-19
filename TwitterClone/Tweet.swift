@@ -16,8 +16,6 @@ struct Tweet: Codable, Identifiable {
     var message: String
     var userID: Int64
     
-    static let noTweets = Tweet(messageID: 0, message: "You have no tweets", userID: 0)
-    
     private enum CodingKeys: String, CodingKey {
         case messageID = "message_id"
         case message

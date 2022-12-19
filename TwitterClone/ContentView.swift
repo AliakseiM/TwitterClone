@@ -51,6 +51,9 @@ struct TweetFeed: View {
                 TabView {
                     NavigationStack {
                         VStack {
+                            if fetcher.tweets.count == 0 {
+                                Text("no data")
+                            }
                             List(fetcher.tweets) { tweet in
                                 TweetView(isRecommended: true, userDisplayName: "User User", isVerified: true, userNickName: "lol_kek", howLongAgo: "2h", message: tweet.message, commentsCount: "123", retweetsCount: "123", likesCount: "123")
                                     .listRowBackground(Color.clear)

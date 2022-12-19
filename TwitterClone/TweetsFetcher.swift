@@ -8,9 +8,9 @@
 import SwiftUI
 
 class TweetsFetcher: ObservableObject {
-    @Published var tweets = [Tweet.noTweets]
+    @Published var tweets = [Tweet]()
 
-    let urlString = "http://localhost:8080/tweets"
+    let urlString = "http://192.168.202.172:8080/tweets"
     
     enum FetchError: Error {
             case badRequest
