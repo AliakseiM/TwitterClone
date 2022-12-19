@@ -13,7 +13,7 @@ struct TwitterCloneApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TweetFeed()
+            TweetFeed(userDisplayName: "Developer", userNickName: "dev", following: "3K", followers: "101")
                 .environmentObject(fetcher)
         }
     }
