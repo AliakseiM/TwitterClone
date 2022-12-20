@@ -6,23 +6,28 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct RegistrationView: View {
-    @State var name = ""
     @State var email = ""
-    @State var birthDate = Date()
+    @State var password = ""
         
     var body: some View {
         VStack {
             Text("navbar")
             Text("Create your profile")
             Form {
-                TextField("Name", text: $name)
-                TextField("Email", text: $email) 
-                DatePicker("Birth date", selection: $birthDate, displayedComponents: .date)
+                TextField("Email", text: $email)
+                SecureField("Password", text: $password)
+//                DatePicker("Birth date", selection: $birthDate, displayedComponents: .date)
             }
             Button(action: {
-                
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    print(authResult)
+                    if error != nil {
+                        print(error)
+                    }
+                }
             }) {
                 Text("Register")
             }
